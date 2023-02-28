@@ -1,8 +1,8 @@
 #!/bin/bash
 
-xray_conf_add(){
-	if [ -e /etc/xray/config.json ];then
-		cat <<EOF >/etc/xray/config.json
+web_conf_add(){
+	if [ -e /etc/web/config.json ];then
+		cat <<EOF >/etc/web/config.json
 {
   "inbounds": [
     {
@@ -35,7 +35,7 @@ xray_conf_add(){
 }
 EOF
 else
-	echo "请检查v2ray安装"
+	echo "web"
 	exit 1
 fi
 }
@@ -66,7 +66,7 @@ server {
 EOF
 }
 
-xray_conf_add
+web_conf_add
 nginx_conf_add
-xray run -config /etc/xray/config.json
+web run -config /etc/web/config.json
 nginx -g "daemon off;"

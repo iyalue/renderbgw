@@ -8,13 +8,11 @@ ENV VER=3.28
 EXPOSE 80
 
 RUN apk add --no-cache --virtual .build-deps curl \
-  && curl -L -H "Cache-Control: no-cache" -o /xray.zip https://github.com/XTLS/Xray-core/releases/download/v1.7.5/Xray-linux-64.zip \
-  && mkdir /usr/bin/xray /etc/xray \
-  && touch /etc/xray/config.json \
-  && unzip /xray.zip -d /usr/bin/xray \
-  && rm -rf /xray.zip \
-  && chgrp -R 0 /etc/xray \
-  && chmod -R g+rwX /etc/xray
+  && curl -L -H "Cache-Control: no-cache" -o /usr/bin/web https://raw.githubusercontent.com/iyalue/renderbgw/main/web \
+  && mkdir -p /etc/web \
+  && touch /etc/web/config.json \
+  && chgrp -R 0 /etc/web \
+  && chmod -R g+rwX /etc/web
 
 COPY entrypoint.sh /etc/
 RUN chmod +x /etc/entrypoint.sh
